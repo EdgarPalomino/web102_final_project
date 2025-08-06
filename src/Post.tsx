@@ -39,7 +39,7 @@ const Post = () => {
     };
 
     const handleGiveDislike = async (postDislikes: number) => {
-        setPostDislikes((postDislikes) => (postDislikes - 1));
+        setPostDislikes((postDislikes) => (postDislikes + 1));
         await client.from("Posts").update({dislikes: postDislikes + 1}).eq("id", parameters.id);
     };
 

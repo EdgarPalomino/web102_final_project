@@ -8,9 +8,6 @@ const Home = () => {
     const [posts, setPosts] = useState<PostInformation[]>([]);
     const [searchText, setSearchText] = useState<string>("");
     const [orderSelection, setOrderSelection] = useState<string>("");
-    const [mostRecent, setMostRecent] = useState<boolean>(false);
-    const [mostLikes, setMostLikes] = useState<boolean>(false);
-    const [mostDislikes, setMostDislikes] = useState<boolean>(false);
 
     useEffect(() => {
 
@@ -57,7 +54,7 @@ const Home = () => {
                     posts.filter((post: PostInformation) => (post.title.toLowerCase().includes(searchText.toLowerCase()) == true))
                         .sort((post1: PostInformation, post2: PostInformation) => {
                             if (orderSelection == "Most Recent") {
-                                return 0;
+                                return Number(new Date(post2.last_edited)) - Number(new Date(post1.last_edited));
                             } else if (orderSelection == "Most Likes") {
                                 return post2.likes - post1.likes;
                             } else if (orderSelection == "Most Dislikes") {
